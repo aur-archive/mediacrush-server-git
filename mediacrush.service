@@ -1,0 +1,12 @@
+[Unit]
+Description=MediaCrush gunicorn daemon
+Wants=mediacrush-daemon.service redis.service
+
+[Service]
+User=http
+WorkingDirectory=/var/lib/mediacrush
+EnvironmentFile=/etc/conf.d/mediacrush
+ExecStart=/usr/bin/gunicorn app:app -b ${MEDIACRUSH_IP}:${MEDIACRUSH_PORT}
+
+[Install]
+WantedBy=multi-user.target
